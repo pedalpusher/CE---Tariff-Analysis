@@ -132,83 +132,91 @@ for k=length(raw):-1:1
     %%  Allocate tariff data
         for j=1:1:length(raw{k})
             if ~isempty(strfind(raw{k}{j,1},'Monthly Direct Debit'))
-                for i=1:1:length(rname)
-                    if ~isempty(strfind(raw{k}{j,2},rname2{i}))
-                        if ~isempty(strfind((raw{k}{j,3}),'Gas'))
-                            data.(cname{k}).(tname{k}).MDD.(rname{i}).GasU=[raw{k}{j,9}];
-                            data.(cname{k}).(tname{k}).MDD.(rname{i}).GasSt=[raw{k}{j,6}];
+                if ~isempty(strfind(raw{k}{j,4},'Yes'))
+                    for i=1:1:length(rname)
+                        if ~isempty(strfind(raw{k}{j,2},rname2{i}))
+                            if ~isempty(strfind((raw{k}{j,3}),'Gas'))
+                                data.(cname{k}).(tname{k}).MDD.(rname{i}).GasU=[raw{k}{j,9}];
+                                data.(cname{k}).(tname{k}).MDD.(rname{i}).GasSt=[raw{k}{j,6}];
+                            end
+                            if ~isempty(strfind((raw{k}{j,3}),'Electricity(standard meter)'))
+                                data.(cname{k}).(tname{k}).MDD.(rname{i}).Elec0=[raw{k}{j,9}];
+                                data.(cname{k}).(tname{k}).MDD.(rname{i}).ElecSt=[raw{k}{j,6}];
+                            end
+                            if ~isempty(strfind((raw{k}{j,3}),'Electricity(E7 meter)'))
+                                data.(cname{k}).(tname{k}).MDD.(rname{i}).Elec1=[raw{k}{j,9}];
+                                data.(cname{k}).(tname{k}).MDD.(rname{i}).Elec2=[raw{k}{j,10}];
+                                data.(cname{k}).(tname{k}).MDD.(rname{i}).ElecN=[raw{k}{j,11}];
+                            end
+                            data.(cname{k}).(tname{k}).MDD.(rname{i}).DOL=[];
+                            data.(cname{k}).(tname{k}).MDD.(rname{i}).DDF=[];
                         end
-                        if ~isempty(strfind((raw{k}{j,3}),'Electricity(standard meter)'))
-                            data.(cname{k}).(tname{k}).MDD.(rname{i}).Elec0=[raw{k}{j,9}];
-                            data.(cname{k}).(tname{k}).MDD.(rname{i}).ElecSt=[raw{k}{j,6}];
-                        end
-                        if ~isempty(strfind((raw{k}{j,3}),'Electricity(E7 meter)'))
-                            data.(cname{k}).(tname{k}).MDD.(rname{i}).Elec1=[raw{k}{j,9}];
-                            data.(cname{k}).(tname{k}).MDD.(rname{i}).Elec2=[raw{k}{j,10}];
-                            data.(cname{k}).(tname{k}).MDD.(rname{i}).ElecN=[raw{k}{j,11}];
-                        end
-                        data.(cname{k}).(tname{k}).MDD.(rname{i}).DOL=[];
-                        data.(cname{k}).(tname{k}).MDD.(rname{i}).DDF=[];
                     end
                 end
             elseif ~isempty(strfind(raw{k}{j,1},'Pay On Receipt Of Bill'))
                 for i=1:1:length(rname)
                     if ~isempty(strfind(raw{k}{j,2},rname2{i}))
-                        if ~isempty(strfind((raw{k}{j,3}),'Gas'))
-                            data.(cname{k}).(tname{k}).PayOn.(rname{i}).GasU=[raw{k}{j,9}];
-                            data.(cname{k}).(tname{k}).PayOn.(rname{i}).GasSt=[raw{k}{j,6}];
+                        if ~isempty(strfind(raw{k}{j,4},'Yes'))
+                            if ~isempty(strfind((raw{k}{j,3}),'Gas'))
+                                data.(cname{k}).(tname{k}).PayOn.(rname{i}).GasU=[raw{k}{j,9}];
+                                data.(cname{k}).(tname{k}).PayOn.(rname{i}).GasSt=[raw{k}{j,6}];
+                            end
+                            if ~isempty(strfind((raw{k}{j,3}),'Electricity(standard meter)'))
+                                data.(cname{k}).(tname{k}).PayOn.(rname{i}).Elec0=[raw{k}{j,9}];
+                                data.(cname{k}).(tname{k}).PayOn.(rname{i}).ElecSt=[raw{k}{j,6}];
+                            end
+                            if ~isempty(strfind((raw{k}{j,3}),'Electricity(E7 meter)'))
+                                data.(cname{k}).(tname{k}).PayOn.(rname{i}).Elec1=[raw{k}{j,9}];
+                                data.(cname{k}).(tname{k}).PayOn.(rname{i}).Elec2=[raw{k}{j,10}];
+                                data.(cname{k}).(tname{k}).PayOn.(rname{i}).ElecN=[raw{k}{j,11}];
+                            end
+                            data.(cname{k}).(tname{k}).PayOn.(rname{i}).DOL=[];
+                            data.(cname{k}).(tname{k}).PayOn.(rname{i}).DDF=[];
                         end
-                        if ~isempty(strfind((raw{k}{j,3}),'Electricity(standard meter)'))
-                            data.(cname{k}).(tname{k}).PayOn.(rname{i}).Elec0=[raw{k}{j,9}];
-                            data.(cname{k}).(tname{k}).PayOn.(rname{i}).ElecSt=[raw{k}{j,6}];
-                        end
-                        if ~isempty(strfind((raw{k}{j,3}),'Electricity(E7 meter)'))
-                            data.(cname{k}).(tname{k}).PayOn.(rname{i}).Elec1=[raw{k}{j,9}];
-                            data.(cname{k}).(tname{k}).PayOn.(rname{i}).Elec2=[raw{k}{j,10}];
-                            data.(cname{k}).(tname{k}).PayOn.(rname{i}).ElecN=[raw{k}{j,11}];
-                        end
-                        data.(cname{k}).(tname{k}).PayOn.(rname{i}).DOL=[];
-                        data.(cname{k}).(tname{k}).PayOn.(rname{i}).DDF=[];
                     end
                 end
             elseif ~isempty(strfind(raw{k}{j,1},'Quarterly Direct Debit'))
                 for i=1:1:length(rname)
                     if ~isempty(strfind(raw{k}{j,2},rname2{i}))
-                        if ~isempty(strfind((raw{k}{j,3}),'Gas'))
-                            data.(cname{k}).(tname{k}).QDD.(rname{i}).GasU=[raw{k}{j,9}];
-                            data.(cname{k}).(tname{k}).QDD.(rname{i}).GasSt=[raw{k}{j,6}];
+                        if ~isempty(strfind(raw{k}{j,4},'Yes'))
+                            if ~isempty(strfind((raw{k}{j,3}),'Gas'))
+                                data.(cname{k}).(tname{k}).QDD.(rname{i}).GasU=[raw{k}{j,9}];
+                                data.(cname{k}).(tname{k}).QDD.(rname{i}).GasSt=[raw{k}{j,6}];
+                            end
+                            if ~isempty(strfind((raw{k}{j,3}),'Electricity(standard meter)'))
+                                data.(cname{k}).(tname{k}).QDD.(rname{i}).Elec0=[raw{k}{j,9}];
+                                data.(cname{k}).(tname{k}).QDD.(rname{i}).ElecSt=[raw{k}{j,6}];
+                            end
+                            if ~isempty(strfind((raw{k}{j,3}),'Electricity(E7 meter)'))
+                                data.(cname{k}).(tname{k}).QDD.(rname{i}).Elec1=[raw{k}{j,9}];
+                                data.(cname{k}).(tname{k}).QDD.(rname{i}).Elec2=[raw{k}{j,10}];
+                                data.(cname{k}).(tname{k}).QDD.(rname{i}).ElecN=[raw{k}{j,11}];
+                            end
+                            data.(cname{k}).(tname{k}).QDD.(rname{i}).DOL=[];
+                            data.(cname{k}).(tname{k}).QDD.(rname{i}).DDF=[];
                         end
-                        if ~isempty(strfind((raw{k}{j,3}),'Electricity(standard meter)'))
-                            data.(cname{k}).(tname{k}).QDD.(rname{i}).Elec0=[raw{k}{j,9}];
-                            data.(cname{k}).(tname{k}).QDD.(rname{i}).ElecSt=[raw{k}{j,6}];
-                        end
-                        if ~isempty(strfind((raw{k}{j,3}),'Electricity(E7 meter)'))
-                            data.(cname{k}).(tname{k}).QDD.(rname{i}).Elec1=[raw{k}{j,9}];
-                            data.(cname{k}).(tname{k}).QDD.(rname{i}).Elec2=[raw{k}{j,10}];
-                            data.(cname{k}).(tname{k}).QDD.(rname{i}).ElecN=[raw{k}{j,11}];
-                        end
-                        data.(cname{k}).(tname{k}).QDD.(rname{i}).DOL=[];
-                        data.(cname{k}).(tname{k}).QDD.(rname{i}).DDF=[];
                     end
                 end
             elseif ~isempty(strfind(raw{k}{j,1},'Prepayment Meter'))
                 for i=1:1:length(rname)
                     if ~isempty(strfind(raw{k}{j,2},rname2{i}))
-                        if ~isempty(strfind((raw{k}{j,3}),'Gas'))
-                            data.(cname{k}).(tname{k}).PreP.(rname{i}).GasU=[raw{k}{j,9}];
-                            data.(cname{k}).(tname{k}).PreP.(rname{i}).GasSt=[raw{k}{j,6}];
+                        if ~isempty(strfind(raw{k}{j,4},'Yes'))
+                            if ~isempty(strfind((raw{k}{j,3}),'Gas'))
+                                data.(cname{k}).(tname{k}).PreP.(rname{i}).GasU=[raw{k}{j,9}];
+                                data.(cname{k}).(tname{k}).PreP.(rname{i}).GasSt=[raw{k}{j,6}];
+                            end
+                            if ~isempty(strfind((raw{k}{j,3}),'Electricity(standard meter)'))
+                                data.(cname{k}).(tname{k}).PreP.(rname{i}).Elec0=[raw{k}{j,9}];
+                                data.(cname{k}).(tname{k}).PreP.(rname{i}).ElecSt=[raw{k}{j,6}];
+                            end
+                            if ~isempty(strfind((raw{k}{j,3}),'Electricity(E7 meter)'))
+                                data.(cname{k}).(tname{k}).PreP.(rname{i}).Elec1=[raw{k}{j,9}];
+                                data.(cname{k}).(tname{k}).PreP.(rname{i}).Elec2=[raw{k}{j,10}];
+                                data.(cname{k}).(tname{k}).PreP.(rname{i}).ElecN=[raw{k}{j,11}];
+                            end
+                            data.(cname{k}).(tname{k}).PreP.(rname{i}).DOL=[];
+                            data.(cname{k}).(tname{k}).PreP.(rname{i}).DDF=[];
                         end
-                        if ~isempty(strfind((raw{k}{j,3}),'Electricity(standard meter)'))
-                            data.(cname{k}).(tname{k}).PreP.(rname{i}).Elec0=[raw{k}{j,9}];
-                            data.(cname{k}).(tname{k}).PreP.(rname{i}).ElecSt=[raw{k}{j,6}];
-                        end
-                        if ~isempty(strfind((raw{k}{j,3}),'Electricity(E7 meter)'))
-                            data.(cname{k}).(tname{k}).PreP.(rname{i}).Elec1=[raw{k}{j,9}];
-                            data.(cname{k}).(tname{k}).PreP.(rname{i}).Elec2=[raw{k}{j,10}];
-                            data.(cname{k}).(tname{k}).PreP.(rname{i}).ElecN=[raw{k}{j,11}];
-                        end
-                        data.(cname{k}).(tname{k}).PreP.(rname{i}).DOL=[];
-                        data.(cname{k}).(tname{k}).PreP.(rname{i}).DDF=[];
                     end
                 end
             end
