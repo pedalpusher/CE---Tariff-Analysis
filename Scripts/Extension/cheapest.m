@@ -36,6 +36,7 @@ xlswrite('cheapest',cheapest)
 %% Find the cheapest tariff in each region/archetype for each supplier
 
 cheapest=cell(size(rname,1),size(arch,1));
+result=cell(size(rname,1),size(arch,1));
 for a=1:1:length(rname)
     for b=1:1:length(arch)
         for c=1:1:length(cname)
@@ -51,7 +52,7 @@ for a=1:1:length(rname)
         [supplierID,tariffID]=(find(val1==min(val1(val1>0))));
         cheapest(1,2:(length(arch)+1))=arch;
         cheapest(2:(length(rname)+1),1)=rname;
-        result{a,b}=strcat ( (cname(q(1))),' - ',(tnames{q(1)}{w(1)}) );
+        result{a,b}=strcat ( (cname(supplierID(1))),' - ',(tnames{supplierID(1)}{tariffID(1)}) );
         cheapest{a+1,b+1}=result{a,b};
         clear val1
         clear supplierID
