@@ -128,6 +128,11 @@ for k=length(raw):-1:1
             SPay.(payname{p})=SReg;
         end
         data.(cname{k}).(tname{k})=SPay;
+        
+        %% Include origonal company/tariff names
+        
+        data.(cname{k}).(tname{k}).CompanyName=companyname{k};
+        data.(cname{k}).(tname{k}).TariffName=tariffname{k};
     
     %%  Allocate tariff data
         for j=1:1:length(raw{k})
