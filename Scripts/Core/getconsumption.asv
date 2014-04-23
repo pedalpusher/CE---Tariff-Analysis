@@ -4,7 +4,7 @@ conpath='C:\Users\davidchristopherson\Documents\MATLAB\~Switching Behavior Model
 
 [~,~,rawcon]=xlsread(conpath);
 
-arch=rawcon(2:(length(rawcon)-1),8);
+arch=rawcon(2:length(,8);
 
 conval=struct();
 for i=1:1:length(arch)
