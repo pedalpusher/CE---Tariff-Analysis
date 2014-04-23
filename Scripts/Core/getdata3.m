@@ -134,7 +134,7 @@ for k=length(raw):-1:1
         data.(cname{k}).(tname{k}).CompanyName=companyname{k};
         data.(cname{k}).(tname{k}).TariffName=tariffname{k};
     
-    %%  Allocate tariff data
+        %%  Allocate tariff data
         for j=1:1:length(raw{k})
             if ~isempty(strfind(raw{k}{j,1},'Monthly Direct Debit'))
                 if ~isempty(strfind(raw{k}{j,4},'Yes'))
