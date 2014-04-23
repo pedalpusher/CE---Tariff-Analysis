@@ -15,4 +15,3 @@ getconsumption - pulls consumer archetype information from specified file
 
 cheapest - outputs a table displaying the names of the cheapest tariff across regions and consumer archetypes.
 
-marketgrid - outputs a spreadsheet containing market grid tables for all specified archetypes and pays. Spreadsheet should be pre-formated to provide graphical output.
