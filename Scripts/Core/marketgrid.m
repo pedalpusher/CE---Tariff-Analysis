@@ -1,4 +1,4 @@
-function output = marketgrid (data)
+function output = marketgrid (data,write)
 
 %% Extraction of data from data struct into matlab array
 gap=18;% Gap between entries
@@ -29,13 +29,15 @@ for a=1:1:length(cname)
                     
                     output{c}{((e)*gap)+(2+d),entry+1}=data.(cname{a}).(tname{b}).(pays{c}).(rname{d}).E1TMB.(archs{e});
                     
-                    output2{c}{((e)*gap)+(2+d),1}=rname(d);
-                    
                 end
             end
         end
     end
 end
+
+%% Find each of Big Six's cheapest tariffs, calculate the average, append results to output
+
+
 
 %% Initialisation of POI Libs
 % Add Java POI Libs to matlab javapath
@@ -47,7 +49,9 @@ javaaddpath('C:\Users\davidchristopherson\Documents\MATLAB\~Switching Behavior M
 javaaddpath('C:\Users\davidchristopherson\Documents\MATLAB\~Switching Behavior Modelling\Scripts\Imported\poi_library\stax-api-1.0.1.jar');
 
 %% Output to .xlsx
-for a=1:1:length(pays)
-    outpath='C:\Users\davidchristopherson\Documents\MATLAB\~Switching Behavior Modelling\Results\marketgrid.xlsx';
-    xlwrite(outpath,output{a},(pays{a}))
-end 
+if write==true
+    for a=1:1:length(pays)
+        outpath='C:\Users\davidchristopherson\Documents\MATLAB\~Switching Behavior Modelling\Results\marketgrid.xlsx';
+        xlwrite(outpath,output{a},(pays{a}))
+    end
+end
